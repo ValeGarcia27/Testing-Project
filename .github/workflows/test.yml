@@ -15,11 +15,11 @@ jobs:
         with:
           node-version: 18
 
+      - name: Show Node.js version
+        run: node -v  # Verifica que se usa la versión correcta
+
       - name: Install dependencies
         run: npm ci  # O usa "npm install" si no tienes package-lock.json
 
-      - name: Fix Jest permissions
-        run: chmod +x node_modules/.bin/jest
-
       - name: Run tests
-        run: npx jest
+        run: npx jest --ci --verbose  # Activa el modo CI para evitar errores en entornos de GitHub Actions
