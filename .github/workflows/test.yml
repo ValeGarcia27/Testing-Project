@@ -1,12 +1,6 @@
 name: Run Tests
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   test:
@@ -22,7 +16,10 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # O usa "npm install" si no tienes package-lock.json
+
+      - name: Fix Jest permissions
+        run: chmod +x node_modules/.bin/jest
 
       - name: Run tests
-        run: npm test
+        run: npx jest
